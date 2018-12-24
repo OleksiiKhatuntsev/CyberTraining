@@ -41,5 +41,13 @@ namespace BLL.Db
         {
             db.Update(role);
         }
+
+        public void FillRoles()
+        {
+            db.Insert(new Role { RoleName = "Administrator" });
+            db.Insert(new Role { RoleName = "Trainer" });
+            db.Insert(new Role { RoleName = "Player" });
+            db.Insert(new Role { RoleName = "NonApproved" });
+        }
     }
 }

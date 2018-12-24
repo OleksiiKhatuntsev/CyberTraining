@@ -41,5 +41,10 @@ namespace BLL.Db
         {
             db.Update(user);
         }
+
+        public void InsertAdmin()
+        {
+            db.Insert(new User{Email = "admin@admin.com", Password = "admin", RoleId = 1, UserName = "Administrator"});
+        }
     }
 }

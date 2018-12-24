@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL.Db;
 using Microsoft.AspNetCore.Mvc;
 using Kursach.Models;
 using BOL;
+using MVC_Web.Controllers;
 
 namespace Kursach.Controllers
 {
-    public class HomeController : Controller
-    {
-        CyberTrainingContext db;
-        
-        public HomeController(CyberTrainingContext context)
+    public class HomeController : BaseController
+    {      
+        public HomeController(CyberTrainingContext context) : base(context)
         {
-            db = context;
-            db.Roles.Add(new BOL.Models.Role { RoleName = "Administrator" });
-            db.SaveChanges();
+            db = new AllDb(context);
+            if (!db.RoleDb.GetAll().Any())
+            {
+                db.RoleDb.FillRoles();
+                db.UserDb.InsertAdmin();
+            }
         }
         public IActionResult Index()
         {
