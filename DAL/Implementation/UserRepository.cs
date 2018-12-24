@@ -11,17 +11,15 @@ namespace DAL.Implementation
     {
         public UserRepository(CyberTrainingContext context) : base(context)
         { }
-
-        public void Delete(int id)
+        public void Insert(User user)
         {
-            User user = GetById(id);
-            db.Entry(user).State = EntityState.Deleted;
+            db.Entry(user).State = EntityState.Added;
             db.SaveChanges();
         }
 
         public IEnumerable<User> GetAll()
         {
-            return db.Users.AsEnumerable();
+            return db.Users.ToList();
         }
 
         public User GetById(int id)
@@ -29,9 +27,10 @@ namespace DAL.Implementation
             return db.Users.FirstOrDefault(x=>x.UserId == id);
         }
 
-        public void Insert(User user)
+        public void Delete(int id)
         {
-            db.Entry(user).State = EntityState.Added;
+            User user = GetById(id);
+            db.Entry(user).State = EntityState.Deleted;
             db.SaveChanges();
         }
 

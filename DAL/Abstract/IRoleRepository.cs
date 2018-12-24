@@ -9,7 +9,7 @@ namespace DAL.Abstract
     {
         void Insert(Role role);
         IEnumerable<Role> GetAll();
-        User GetById(int id);
+        Role GetById(int id);
         void Delete(int id);
         void Update(Role role);
     }

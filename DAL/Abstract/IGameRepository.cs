@@ -9,7 +9,7 @@ namespace DAL.Abstract
     {
         void Insert(Game game);
         IEnumerable<Game> GetAll();
-        User GetById(int id);
+        Game GetById(int id);
         void Delete(int id);
         void Update(Game game);
     }

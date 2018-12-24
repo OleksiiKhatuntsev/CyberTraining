@@ -9,7 +9,7 @@ namespace DAL.Abstract
     {
         void Insert(Genre genre);
         IEnumerable<Genre> GetAll();
-        User GetById(int id);
+        Genre GetById(int id);
         void Delete(int id);
         void Update(Genre genre);
     }
