@@ -1,0 +1,32 @@
+﻿@model BOL.Models.User
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<a asp-action="Login" asp-controller="Account">Log in</a>
+
+<form asp-action="Login" asp-controller="Account" asp-antiforgery="true">
+    <div class="field-validation-error" asp-validation-summary="ModelOnly"></div>
+    <div>
+        <div class="form-group">
+            <label class="col-lg-2 control-label" asp-for="UserName">UserName</label>
+            <div class="col-lg-10">
+                <input class="control-label" type="text" id="focusedInput" asp-for="UserName">
+            </div>
+            <span asp-validation-for="UserName"></span>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label" asp-for="Password">Password</label>
+                <input class="control-label" asp-for="Password">
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-default">
+            </div>
+        </div>
+</form>
+    
+
