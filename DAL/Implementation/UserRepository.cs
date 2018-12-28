@@ -21,6 +21,7 @@ namespace DAL.Implementation
         {
             return db.Users
                 .Include(role => role.Role)
+                .Include(team => team.Team)
                 .ToList();
         }
 

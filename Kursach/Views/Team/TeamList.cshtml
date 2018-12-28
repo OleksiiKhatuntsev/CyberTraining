@@ -39,7 +39,7 @@
             else
             {
                 <td>
-                    <a asp-controller="Team" asp-action="JoinTeam">Join the team</a>
+                    <a asp-controller="Team" asp-action="JoinTeam" asp-route-teamId="@item.TeamId">Join the team</a>
                 </td>
             }
         </tr>
