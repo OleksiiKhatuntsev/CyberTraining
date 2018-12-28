@@ -41,5 +41,13 @@ namespace BLL.Db
         {
             db.Update(game);
         }
+
+        public void FillGames()
+        {
+            db.Insert(new Game { GenreId = 1, GameName = "Dota" });
+            db.Insert(new Game { GenreId = 1, GameName = "Lol" });
+            db.Insert(new Game { GenreId = 2, GameName = "Wow" });
+            db.Insert(new Game { GenreId = 3, GameName = "Hearthstone" });
+        }
     }
 }

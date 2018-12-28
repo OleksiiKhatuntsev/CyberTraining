@@ -44,6 +44,7 @@ namespace Kursach
                 .AddCookie(options =>
                 {
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                    options.AccessDeniedPath = new PathString("/Account/Login");
                 });
         }
 

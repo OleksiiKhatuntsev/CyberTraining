@@ -28,7 +28,7 @@
                 </button>
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">@User.Identity.Name</a>
+                    <a asp-area="" asp-controller="Profile" asp-action="ViewProfile" class="navbar-brand">@User.Identity.Name</a>
                 }
                 else
                 {
@@ -40,6 +40,22 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li><a asp-controller="Admin" asp-action="UserList">Approve users</a></li>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li><a asp-controller="Team" asp-action="TeamList">Teams</a></li>
+                        <li><a asp-controller="Team" asp-action="CreateTeam">Create team</a></li>
+                        <li><a asp-controller="Account" asp-action="SignOut">Sign out</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-controller="Account" asp-action="Register">Register</a></li>
+                        <li><a asp-controller="Account" asp-action="Login">Log in</a></li>
+                    }
+
                 </ul>
             </div>
         </div>

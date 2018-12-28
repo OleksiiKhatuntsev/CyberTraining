@@ -7,6 +7,7 @@ using BLL.Db;
 using Microsoft.AspNetCore.Mvc;
 using Kursach.Models;
 using BOL;
+using Microsoft.AspNetCore.Authorization;
 using MVC_Web.Controllers;
 
 namespace Kursach.Controllers
@@ -18,6 +19,9 @@ namespace Kursach.Controllers
             db = new AllDb(context);
             if (!db.RoleDb.GetAll().Any())
             {
+                db.GenreDb.FillGenres();
+                db.GameDb.FillGames();
+                db.TeamDb.CreateNewbeeTeam();
                 db.RoleDb.FillRoles();
                 db.UserDb.InsertAdmin();
             }
@@ -41,11 +45,13 @@ namespace Kursach.Controllers
             return View();
         }
 
+        [Authorize(Roles = "notAdmin")]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [Authorize(Roles = "Administrator")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

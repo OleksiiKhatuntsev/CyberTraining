@@ -22,7 +22,7 @@ namespace DAL.Implementation
 
         public IEnumerable<Team> GetAll()
         {
-            return db.Teams.ToList();
+            return db.Teams.Include(game => game.Game).ToList();
         }
 
         public Team GetById(int id)

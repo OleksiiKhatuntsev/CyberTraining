@@ -41,5 +41,10 @@ namespace BLL.Db
         {
             db.Update(team);
         }
+
+        public void CreateNewbeeTeam()
+        {
+            db.Insert(new Team { GameId = 1, TeamName = "Newbee" });
+        }
     }
 }

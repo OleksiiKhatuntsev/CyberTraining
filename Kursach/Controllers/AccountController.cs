@@ -31,7 +31,10 @@ namespace MVC_Web.Controllers
                     .GetAll().FirstOrDefault(x => x.UserName == user.UserName && x.Password == user.Password);
             if (getAuthUser != null)
             {
-                Authenticate(user.UserName);
+                user.Role = db.RoleDb.GetById(
+                    // ReSharper disable once PossibleNullReferenceException
+                    db.UserDb.GetAll().FirstOrDefault(x => user != null && x.UserName == user.UserName).RoleId);
+                Authenticate(user);
                 return RedirectToAction("Index", "Home");
             }
             ModelState.AddModelError("", "Invalid username or password");
@@ -54,8 +57,11 @@ namespace MVC_Web.Controllers
                 if (checkForExistingUser)
                 {
                     // ReSharper disable once PossibleNullReferenceException
-                    user.RoleId = db.RoleDb.GetAll().FirstOrDefault(x => x.RoleName == "DontApproved").RoleId;
+                    user.RoleId = db.RoleDb.GetAll().FirstOrDefault(x => x.RoleName == "NonApproved").RoleId;
+                    user.TeamId = 1;
+                    user.Role = db.RoleDb.GetById(user.RoleId);
                     db.UserDb.Insert(user);
+                    Authenticate(user);
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -68,11 +74,18 @@ namespace MVC_Web.Controllers
             return View(user);
         }
 
-        private void Authenticate(string userName)
+        public IActionResult SignOut()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Account");
+        }
+
+        private void Authenticate(User user)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.UserName),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role?.RoleName)
             };
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));

@@ -41,5 +41,12 @@ namespace BLL.Db
         {
             db.Update(genre);
         }
+
+        public void FillGenres()
+        {
+            db.Insert(new Genre{GenreName = "MOBA"});
+            db.Insert(new Genre { GenreName = "MMORPG" });
+            db.Insert(new Genre { GenreName = "CCG" });
+        }
     }
 }

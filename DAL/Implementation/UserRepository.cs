@@ -19,7 +19,9 @@ namespace DAL.Implementation
 
         public IEnumerable<User> GetAll()
         {
-            return db.Users.ToList();
+            return db.Users
+                .Include(role => role.Role)
+                .ToList();
         }
 
         public User GetById(int id)
