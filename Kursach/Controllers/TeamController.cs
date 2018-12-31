@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BOL;
 using BOL.Models;
+using ConditionsService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,8 +14,12 @@ namespace MVC_Web.Controllers
     [Authorize(Roles = "Administrator, Trainer, Player")]
     public class TeamController : BaseController
     {
+        private ConditionsHelper conditionsHelper;
+
         public TeamController(CyberTrainingContext context) : base(context)
-        { }
+        {
+            conditionsHelper = new ConditionsHelper(context);
+        }
 
         public IActionResult TeamList()
         {
@@ -50,6 +55,21 @@ namespace MVC_Web.Controllers
             user.TeamId = teamId;
             db.UserDb.Update(user);
             return RedirectToAction("TeamList", "Team");
+        }
+
+        public IActionResult TeamConditions()
+        {
+            conditionsHelper.GetConditionsFromDevice();
+            var currentUser = db.UserDb.GetAll().FirstOrDefault(x => x.UserName == User.Identity.Name);
+            var userList = db.UserDb.GetAll().Where(x => currentUser != null && x.TeamId == currentUser.TeamId);
+            List<Condition> conditionsList = new List<Condition>();
+            foreach (var user in userList)
+            {
+                conditionsList.Add(db.ConditionDb.GetAll().LastOrDefault(x => x.UserId == user.UserId));
+            }
+
+            ViewBag.Team = db.TeamDb.GetById(currentUser.TeamId).TeamName;
+            return View(conditionsList);
         }
     }
 }

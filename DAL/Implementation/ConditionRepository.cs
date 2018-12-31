@@ -22,7 +22,9 @@ namespace DAL.Implementation
 
         public IEnumerable<Condition> GetAll()
         {
-            return db.Conditions.ToList();
+            return db.Conditions
+                .Include(user=>user.User)
+                .ToList();
         }
 
         public Condition GetById(int id)
