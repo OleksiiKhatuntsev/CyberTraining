@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace BOL.Models
@@ -8,6 +9,7 @@ namespace BOL.Models
     {
         public int GameId { get; set; }
 
+        [DisplayName("Game")]
         public string GameName { get; set; }
 
         public int GenreId { get; set; }

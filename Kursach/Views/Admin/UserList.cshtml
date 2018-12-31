@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<BOL.Models.User>
 
 @{
-    ViewData["Title"] = "UserList";
+    ViewData["Title"] = "User List";
 }
 
 <h2>User Approve</h2>
@@ -34,7 +34,10 @@
                 @Html.DisplayFor(modelItem => item.Role.RoleName)
             </td>
             <td>
-                <a asp-action="ApproveUser" asp-route-userId="@item.UserId">Approve</a> |
+                @if (item.Role.RoleName == "NonApproved")
+                {
+                    <a asp-action="ApproveUser" asp-route-userId="@item.UserId">Approve</a> |
+                }
                 <a asp-action="DeleteUser" asp-controller="Admin" asp-route-userId="@item.UserId">Delete</a>
             </td>
         </tr>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace BOL.Models
@@ -8,6 +10,8 @@ namespace BOL.Models
     {
         public int TeamId { get; set; }
 
+        [Required]
+        [DisplayName("Name")]
         public string TeamName { get; set; }
 
         public int GameId { get; set; }
