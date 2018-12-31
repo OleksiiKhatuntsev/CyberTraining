@@ -29,5 +29,7 @@ namespace BOL.Models
         public int TeamId { get; set; }
 
         public virtual Team Team { get; set; }
+
+        public virtual ICollection<Condition> Conditions { get; set; }
     }
 }

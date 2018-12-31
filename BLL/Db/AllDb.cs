@@ -17,6 +17,8 @@ namespace BLL.Db
 
         public UserDb UserDb { get; set; }
 
+        public ConditionDb ConditionDb { get; set; }
+
         public AllDb(CyberTrainingContext context)
         {
             GameDb = new GameDb(context);
@@ -24,6 +26,7 @@ namespace BLL.Db
             RoleDb = new RoleDb(context);
             TeamDb = new TeamDb(context);
             UserDb = new UserDb(context);
+            ConditionDb = new ConditionDb(context);
         }
     }
 }

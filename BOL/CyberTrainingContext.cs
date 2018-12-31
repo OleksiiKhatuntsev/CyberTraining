@@ -18,6 +18,8 @@ namespace BOL
 
         public DbSet<Team> Teams { get; set; }
 
+        public DbSet<Condition> Conditions { get; set; }
+
         public CyberTrainingContext(DbContextOptions<CyberTrainingContext> options)
             : base(options)
         {
