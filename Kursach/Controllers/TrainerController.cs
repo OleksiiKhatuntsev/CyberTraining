@@ -16,17 +16,30 @@ namespace MVC_Web.Controllers
 
         public IActionResult Index()
         {
+            var players = db.UserDb.GetAll().Where(x => x.Role.RoleName == "Player");
             var currentRole = db.RoleDb.GetAll().FirstOrDefault(x =>
                 x.RoleId == db.UserDb.GetAll().FirstOrDefault(y => y.UserName == User.Identity.Name).RoleId).RoleName;
 
             if (currentRole == "Trainer")
             {
-                return View("MyPlayers");
+                return View("MyPlayers", players);
             }
 
             return View("BecomeATrainer");
         }
 
+        public IActionResult BecomeTrainer()
+        {
+            var user = db.UserDb.GetAll().First(x => x.UserName == User.Identity.Name);
+            user.RoleId = db.RoleDb.GetAll().First(x => x.RoleName == "Trainer").RoleId;
+            db.UserDb.Update(user);
+            return RedirectToAction("Index");
+        }
 
+        public IActionResult PlayersView()
+        {
+            var players = db.UserDb.GetAll().Where(x => x.Role.RoleName == "Player");
+            return View("MyPlayers", players);
+        }
     }
 }

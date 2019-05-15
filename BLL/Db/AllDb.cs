@@ -19,6 +19,8 @@ namespace BLL.Db
 
         public ConditionDb ConditionDb { get; set; }
 
+        public KillDb KillDb { get; set; }
+
         public AllDb(CyberTrainingContext context)
         {
             GameDb = new GameDb(context);
@@ -27,6 +29,7 @@ namespace BLL.Db
             TeamDb = new TeamDb(context);
             UserDb = new UserDb(context);
             ConditionDb = new ConditionDb(context);
+            KillDb = new KillDb(context);
         }
     }
 }

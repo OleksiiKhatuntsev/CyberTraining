@@ -9,6 +9,7 @@ using Kursach.Models;
 using BOL;
 using Microsoft.AspNetCore.Authorization;
 using MVC_Web.Controllers;
+using UserTrackingService;
 
 namespace Kursach.Controllers
 {
@@ -24,6 +25,8 @@ namespace Kursach.Controllers
                 db.TeamDb.CreateNewbeeTeam();
                 db.RoleDb.FillRoles();
                 db.UserDb.InsertAdmin();
+                FakeRepository rep = new FakeRepository(context);
+                rep.SetDataForUser(3);
             }
         }
         public IActionResult Index()

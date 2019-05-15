@@ -20,6 +20,8 @@ namespace BOL
 
         public DbSet<Condition> Conditions { get; set; }
 
+        public DbSet<Kill> Kills { get; set; }
+
         public CyberTrainingContext(DbContextOptions<CyberTrainingContext> options)
             : base(options)
         {
