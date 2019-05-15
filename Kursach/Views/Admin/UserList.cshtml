@@ -36,7 +36,7 @@
             <td>
                 @if (item.Role.RoleName == "NonApproved")
                 {
-                    <a asp-action="ApproveUser" asp-route-userId="@item.UserId">Approve</a> |
+                    <a asp-action="ApproveUser" asp-route-userId="@item.UserId">Approve</a> <p>|</p>
                 }
                 <a asp-action="DeleteUser" asp-controller="Admin" asp-route-userId="@item.UserId">Delete</a>
             </td>
