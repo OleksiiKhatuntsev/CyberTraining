@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BOL.Models.User>
+﻿@model IEnumerable<BOL.Models.Kill>
 
 @{
     ViewData["Title"] = "My Players";
@@ -10,7 +10,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UserName)
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BotKills)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GameForDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AllGames)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsUserInGame)
             </th>
             <th></th>
         </tr>
@@ -19,11 +31,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.UserName)
+                @Html.DisplayFor(modelItem => item.User.UserName)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.UserId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
+                @Html.DisplayFor(modelItem => item.BotKills)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GameForDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllGames)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsUserInGame)
             </td>
         </tr>
 }

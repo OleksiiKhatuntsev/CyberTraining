@@ -5,14 +5,19 @@ using System.Threading.Tasks;
 using BOL;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using UserTrackingService;
 
 namespace MVC_Web.Controllers
 {
     [Authorize]
-    public class TrainerController : BaseController 
+    public class TrainerController : BaseController
     {
+        private UserTrackingHelper userHelper;
+
         public TrainerController(CyberTrainingContext context) : base(context)
-        { }
+        {
+            userHelper = new UserTrackingHelper(context);
+        }
 
         public IActionResult Index()
         {
@@ -22,7 +27,7 @@ namespace MVC_Web.Controllers
 
             if (currentRole == "Trainer")
             {
-                return View("MyPlayers", players);
+                return RedirectToAction("PlayersView");
             }
 
             return View("BecomeATrainer");
@@ -38,8 +43,9 @@ namespace MVC_Web.Controllers
 
         public IActionResult PlayersView()
         {
-            var players = db.UserDb.GetAll().Where(x => x.Role.RoleName == "Player");
-            return View("MyPlayers", players);
+            userHelper.UpdateUserSettings();
+            var kills = db.KillDb.GetAll();
+            return View("MyPlayers", kills);
         }
     }
 }

@@ -14,10 +14,14 @@ using UserTrackingService;
 namespace Kursach.Controllers
 {
     public class HomeController : BaseController
-    {      
+    {
+        private UserTrackingHelper userHelper;
+
         public HomeController(CyberTrainingContext context) : base(context)
         {
             db = new AllDb(context);
+            userHelper = new UserTrackingHelper(context);
+
             if (!db.RoleDb.GetAll().Any())
             {
                 db.GenreDb.FillGenres();
@@ -25,8 +29,14 @@ namespace Kursach.Controllers
                 db.TeamDb.CreateNewbeeTeam();
                 db.RoleDb.FillRoles();
                 db.UserDb.InsertAdmin();
-                FakeRepository rep = new FakeRepository(context);
-                rep.SetDataForUser(3);
+                db.UserDb.InsertFewUsers();
+                foreach (var user in db.UserDb.GetAll())
+                {
+                    if (db.KillDb.GetById(user.UserId) == null && user.RoleId == db.RoleDb.GetAll().First(x=>x.RoleName == "Player").RoleId)
+                    {
+                        userHelper.SetUserSettings(user.UserId);
+                    }
+                }
             }
         }
         public IActionResult Index()

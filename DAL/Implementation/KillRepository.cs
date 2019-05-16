@@ -21,7 +21,9 @@ namespace DAL.Implementation
 
         public IEnumerable<Kill> GetAll()
         {
-            return db.Kills.ToList();
+            return db.Kills
+                .Include(user => user.User)
+                .ToList();
         }
 
         public Kill GetById(int id)
