@@ -44,10 +44,11 @@ namespace BLL.Db
 
         public void FillRoles()
         {
-            db.Insert(new Role { RoleName = "Administrator" });
-            db.Insert(new Role { RoleName = "Trainer" });
-            db.Insert(new Role { RoleName = "Player" });
-            db.Insert(new Role { RoleName = "NonApproved" });
+            db.Insert(new Role {RoleName = "Administrator"});
+            db.Insert(new Role {RoleName = "Trainer"});
+            db.Insert(new Role {RoleName = "Player"});
+            db.Insert(new Role {RoleName = "NonApproved"});
+            db.Insert(new Role {RoleName = "Parent"});
         }
     }
 }

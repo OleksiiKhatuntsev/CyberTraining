@@ -22,6 +22,8 @@ namespace BOL
 
         public DbSet<Kill> Kills { get; set; }
 
+        public DbSet<ParentsControl> ParentsControls { get; set; }
+
         public CyberTrainingContext(DbContextOptions<CyberTrainingContext> options)
             : base(options)
         {
