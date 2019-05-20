@@ -43,13 +43,25 @@
                     {
                         <li><a asp-controller="Admin" asp-action="UserList">Approve users</a></li>
                     }
+                    @if (User.IsInRole("Parent"))
+                    {
+                        <li><a asp-controller="ParentsControl" asp-action="MySubscribes">My subscribes</a></li>
+                        <li><a asp-controller="ParentsControl" asp-action="AllUserList">Users search</a></li>
+                    }
+                    @if (User.IsInRole("Player"))
+                    {
+                        <li><a asp-controller="ParentsControl" asp-action="Index">Become a parent</a></li>
+                    }
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li><a asp-controller="Team" asp-action="TeamList">Teams</a></li>
                         <li><a asp-controller="Team" asp-action="CreateTeam">Create team</a></li>
                         <li><a asp-controller="Team" asp-action="TeamConditions">Conditions of team</a></li>
                         <li><a asp-controller="Profile" asp-action="MyConditions">Conditions history</a></li>
-                        <li><a asp-controller="Trainer" asp-action="Index">My team</a></li>
+                        if (User.IsInRole("Player") || User.IsInRole("Trainer"))
+                        {
+                <li><a asp-controller="Trainer" asp-action="Index">My team</a></li>
+                        }
                         <li><a asp-controller="Account" asp-action="SignOut">Sign out</a></li>
                     }
                     else

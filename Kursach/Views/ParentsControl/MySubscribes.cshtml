@@ -1,0 +1,36 @@
+﻿@model IEnumerable<BOL.Models.ParentsControl>
+
+@{
+    ViewData["Title"] = "My Subscribes";
+}
+
+<h2>My Subscribes</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kill.User.UserName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kill.User.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kill.IsUserInGame)
+            </td>
+            <td>
+                <a asp-action="UnSubscribe" asp-route-id="@item.ParentsControlId">Unsubscribe</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

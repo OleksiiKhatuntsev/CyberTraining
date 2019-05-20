@@ -21,6 +21,8 @@ namespace BLL.Db
 
         public KillDb KillDb { get; set; }
 
+        public ParentsControlDb ParentsControlDb { get; set; }
+
         public AllDb(CyberTrainingContext context)
         {
             GameDb = new GameDb(context);
@@ -30,6 +32,7 @@ namespace BLL.Db
             UserDb = new UserDb(context);
             ConditionDb = new ConditionDb(context);
             KillDb = new KillDb(context);
+            ParentsControlDb = new ParentsControlDb(context);
         }
     }
 }

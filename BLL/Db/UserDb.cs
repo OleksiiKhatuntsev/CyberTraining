@@ -54,6 +54,7 @@ namespace BLL.Db
             db.Insert(new User { Email = "third@admin.com", Password = "admin", RoleId = 3, UserName = "User2", TeamId = 1 });
             db.Insert(new User { Email = "fourth@admin.com", Password = "admin", RoleId = 3, UserName = "User3", TeamId = 1 });
             db.Insert(new User { Email = "fifth@admin.com", Password = "train", RoleId = 2, UserName = "Trainer", TeamId = 1 });
+            db.Insert(new User { Email = "parent@parent.com", Password = "parent", RoleId = 5, UserName = "Parent", TeamId = 1 });
         }
     }
 }

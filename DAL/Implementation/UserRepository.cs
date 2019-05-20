@@ -23,6 +23,7 @@ namespace DAL.Implementation
                 .Include(role => role.Role)
                 .Include(team => team.Team)
                 .Include(condition => condition.Conditions)
+                .Include(parentsControl => parentsControl.ParentsControls)
                 .ToList();
         }
 
